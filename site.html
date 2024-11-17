@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>נשימות ופסנתר | Rebirthing</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="hero-content">
+            <h1>נשימות ופסנתר</h1>
+            <p class="hero-subtitle">מסע של נשימה, מוזיקה וריפוי</p>
+            <div class="welcome-message">
+                <h2>שלום אהובים! 🤍</h2>
+                <p>מוזמנים להצטרף אלינו למסע נשימות ופסנתר🌆</p>
+            </div>
+            <a href="#registration" class="cta-button">הרשמה למפגש הבא</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="upcoming-sessions">
+            <h2>מפגשים קרובים</h2>
+            <div class="sessions-grid">
+                <div class="session-card">
+                    <div class="session-date">
+                        <i class="far fa-calendar"></i>
+                        <span>5.12.24</span>
+                    </div>
+                    <div class="session-time">
+                        <i class="far fa-clock"></i>
+                        <span>חמישי ערב | 20:30-23:00</span>
+                    </div>
+                </div>
+                <div class="session-card">
+                    <div class="session-date">
+                        <i class="far fa-calendar"></i>
+                        <span>14.12.24</span>
+                    </div>
+                    <div class="session-time">
+                        <i class="far fa-clock"></i>
+                        <span>שבת ערב | 19:30-22:00</span>
+                    </div>
+                </div>
+            </div>
+            <p class="location-note">המפגשים מתקיימים בחורף בסטודיו סגור בפלורנטין ובקיץ על גג בפלורנטין בת"א לעת שקיעה✨</p>
+        </section>
+
+        <section class="about-section">
+            <h2>קצת עלינו</h2>
+            <p class="about-intro">אנחנו שלושה מנחים מוסמכים בתהליכי נשימה דינאמית, ומביאים בנוסף את הייחודיות של כל אחד מאיתנו למפגש:</p>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-icon"><i class="fas fa-music"></i></div>
+                    <h3>מאור</h3>
+                    <p>מוסיקאי ונגן פסנתר 🎹</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon"><i class="fas fa-star"></i></div>
+                    <h3>שחר</h3>
+                    <p>משלבת את עולמות האנרגיה ✨</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-icon"><i class="fas fa-wind"></i></div>
+                    <h3>טל</h3>
+                    <p>מטפל בנשימה אינטגרטיבית 🌍</p>
+                </div>
+            </div>
+
+            <div class="mission-statement">
+                <p>אנחנו כאן כדי להעניק לכם חוויה עמוקה שתחבר אתכם לנשימה שלכם עם מוסיקה חיה.</p>
+                <p>המפגש נועד לפתוח את הלבבות, לשחרר מתחים ולהתחבר לרבדים עמוקים יותר של עצמנו.</p>
+            </div>
+        </section>
+
+        <section id="registration" class="registration-form">
+            <h2>הרשמה למפגש</h2>
+            <p class="form-intro">עלות ההשתתפות: 150₪ למשתתף</p>
+            <p class="form-note">כדי שנוכל להכיר אתכם טוב יותר ולהבטיח שתהיה לכם חוויה משמעותית ומועילה, נשמח שתמלאו את הטופס הבא.</p>
+            
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="name">שם מלא *</label>
+                    <input type="text" id="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">טלפון נייד *</label>
+                    <input type="tel" id="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">אימייל *</label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>בחירת מועד *</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="session" value="5.12.24" required>
+                            <span>5.12.24 | חמישי ערב | 20:30-23:00</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="session" value="14.12.24">
+                            <span>14.12.24 | שבת ערב | 19:30-22:00</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>האם יש לך ניסיון קודם בנשימה מעגלית? *</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="experience" value="yes" required>
+                            <span>כן</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="experience" value="no">
+                            <span>לא</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>האם יש לך בעיה בריאותית שכדאי שנדע עליה? *</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="health" value="none" required>
+                            <span>אין לי בעיות בריאותיות המונעות ממני להשתתף בסדנא</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="health" value="epilepsy">
+                            <span>יש לי אפילפסיה</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="health" value="pregnancy">
+                            <span>אני בטרימסטר הראשון להריון</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="health" value="other">
+                            <span>אחר</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="health-info">מידע בריאותי / נפשי נוסף</label>
+                    <textarea id="health-info" rows="3" placeholder="אנא ציין/י אם יש מידע נוסף שחשוב שנדע"></textarea>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" required>
+                        <span>אני מאשר/ת את הצהרת הבריאות: אני בריא/ה וכשיר/ה ואין לי כל בעיה שעשויה למנוע ממני להשתתף בסדנא (תנועה, פעילות גופנית ונשימה מאומצת). אני מבין/ה כי הסדנה כוללת תרגילים פיזיים ושימוש בטכניקות נשימה, ואני משתתף/ת באחריותי האישית בלבד. *</span>
+                    </label>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" required>
+                        <span>אני מאשר/ת את מדיניות הביטולים: עד 48 שעות לפני תחילת הסדנה - החזר מלא. *</span>
+                    </label>
+                </div>
+
+                <div class="payment-info">
+                    <p>לאחר מילוי ושליחת הטופס, יישלח מייל עם לינק לתשלום בפייבוקס או ביט.</p>
+                    <p>מקומכם בסדנה ישוריין רק לאחר התשלום.</p>
+                    <p>במקרה של קושי כלכלי, דברו איתנו ונמצא פתרון יחד.</p>
+                </div>
+
+                <button type="submit" class="submit-button">שליחת טופס</button>
+            </form>
+        </section>
+
+        <section class="contact-section">
+            <h2>צרו קשר</h2>
+            <p>נשמח ללוות אתכם במסע 🤍</p>
+            <p>להצטרפות לקבוצת הוואטסאפ השקטה שלנו לעדכונים על מפגשים נוספים:</p>
+            <a href="https://bit.ly/RebirthingWhatsApp" class="whatsapp-button" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+                הצטרפו לקבוצה
+            </a>
+            <div class="contact-info">
+                <p>
+                    <i class="far fa-envelope"></i>
+                    <a href="mailto:sabag.tal@gmail.com">sabag.tal@gmail.com</a>
+                </p>
+                <p class="signature">מחכים לכם בקוצר רוח,<br>טל, מאור ושחר</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
