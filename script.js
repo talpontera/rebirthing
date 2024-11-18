@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('registrationForm');
-    const ZAPIER_WEBHOOK_URL = 'YOUR_ZAPIER_WEBHOOK_URL'; // Replace with your Zapier webhook URL
+    const ZAPIER_WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/8063579/2rr7w8s/'; // Replace with your Zapier webhook URL
     
     // Smooth scroll for navigation
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -95,12 +95,62 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000);
     }
 
-    // Form submission handler with Zapier integration
+    // At the top of your file, add a function to validate the webhook URL
+    function isValidUrl(string) {
+        try {
+            new URL(string);
+            return true;
+        } catch (_) {
+            return false;
+        }
+    }
+
+    // Add a function to handle the response
+    async function handleResponse(response) {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+            return response.json();
+        }
+        return response.text(); // Fallback to text if not JSON
+    }
+
+    // Add backup email submission function
+    async function sendEmailBackup(formData) {
+        const EMAIL_SERVICE_URL = 'https://formsubmit.co/sabag.tal@gmail.com'; // Replace with your email
+        
+        try {
+            const response = await fetch(EMAIL_SERVICE_URL, {
+                method: 'POST',
+                body: JSON.stringify({
+                    ...formData,
+                    _subject: `הרשמה חדשה למפגש נשימות ופסנתר - ${formData.name}`,
+                    _template: 'table'
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            });
+            return response.ok;
+        } catch (error) {
+            console.error('Backup email submission failed:', error);
+            return false;
+        }
+    }
+
+    // Update the handleSubmit function to include backup
     async function handleSubmit(event) {
         event.preventDefault();
         let isValid = true;
         const submitButton = form.querySelector('.submit-button');
         
+        // Validate webhook URL
+        if (!isValidUrl(ZAPIER_WEBHOOK_URL)) {
+            console.error('Invalid webhook URL');
+            showError(submitButton, 'שגיאת תצורה. אנא צרו קשר עם מנהל האתר.');
+            return;
+        }
+
         const formData = {
             name: document.getElementById('name').value,
             phone: document.getElementById('phone').value,
@@ -139,26 +189,43 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.disabled = true;
 
             try {
-                // Send data to Zapier
+                // Try Zapier first
                 const response = await fetch(ZAPIER_WEBHOOK_URL, {
                     method: 'POST',
                     body: JSON.stringify(formData),
                     headers: {
-                        'Content-Type': 'application/json'
-                    }
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json, text/plain, */*'
+                    },
+                    mode: 'cors',
+                    credentials: 'omit'
                 });
 
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    // If Zapier fails, try email backup
+                    const emailSent = await sendEmailBackup(formData);
+                    
+                    if (!emailSent) {
+                        throw new Error('Both primary and backup submission failed');
+                    }
+                    
+                    // If email backup succeeded
+                    showSuccess('תודה על ההרשמה! ניצור איתך קשר בהקדם');
+                    form.reset();
+                    return;
                 }
 
-                // Handle successful submission
+                const data = await handleResponse(response);
+
+                // Success handling
                 showSuccess('תודה על ההרשמה! ניצור איתך קשר בהקדם');
                 form.reset();
 
                 // Reset health info field visibility
                 const healthInfoGroup = document.getElementById('health-info').closest('.form-group');
-                healthInfoGroup.style.display = 'none';
+                if (healthInfoGroup) {
+                    healthInfoGroup.style.display = 'none';
+                }
 
                 // Smooth scroll to success message
                 window.scrollTo({
@@ -166,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     behavior: 'smooth'
                 });
 
-                // Optional: Track conversion
+                // Track conversion if gtag is available
                 if (typeof gtag !== 'undefined') {
                     gtag('event', 'form_submission', {
                         'event_category': 'Forms',
@@ -176,7 +243,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
             } catch (error) {
                 console.error('Submission error:', error);
-                showError(submitButton, 'אירעה שגיאה בשליחת הטופס. אנא נסו שנית מאוחר יותר.');
+                
+                // Try email backup if not already tried
+                if (!error.message.includes('Both primary and backup')) {
+                    try {
+                        const emailSent = await sendEmailBackup(formData);
+                        if (emailSent) {
+                            showSuccess('תודה על ההרשמה! ניצור איתך קשר בהקדם');
+                            form.reset();
+                            return;
+                        }
+                    } catch (backupError) {
+                        console.error('Backup submission failed:', backupError);
+                    }
+                }
+                
+                // Show error message if both methods failed
+                let errorMessage = 'אירעה שגיאה בשליחת הטופס. אנא צרו קשר איתנו בוואטסאפ או באימייל.';
+                showError(submitButton, errorMessage);
+                
+                // Add WhatsApp fallback button
+                const whatsappFallback = document.createElement('a');
+                whatsappFallback.href = `https://wa.me/9720508494803?text=${encodeURIComponent(
+                    `שלום, ניסיתי להירשם למפגש אך הייתה בעיה טכנית.
+                    שם: ${formData.name}
+                    טלפון: ${formData.phone}
+                    אימייל: ${formData.email}
+                    מועד: ${formData.session}`
+                )}`;
+                whatsappFallback.className = 'whatsapp-button';
+                whatsappFallback.innerHTML = '<i class="fab fa-whatsapp"></i> שליחה בוואטסאפ';
+                whatsappFallback.target = '_blank';
+                
+                submitButton.parentNode.insertBefore(whatsappFallback, submitButton.nextSibling);
+                
             } finally {
                 submitButton.classList.remove('loading');
                 submitButton.disabled = false;
