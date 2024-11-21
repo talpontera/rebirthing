@@ -1332,3 +1332,92 @@ input[type="checkbox"] {
     50% { box-shadow: 0 0 20px rgba(255, 154, 139, 0.3); }
     100% { box-shadow: 0 0 5px rgba(255, 154, 139, 0.1); }
 }
+
+/* תיקוני מרכוז למובייל */
+@media (max-width: 768px) {
+    /* תיקון למסך הראשי */
+    .hero {
+        min-height: 100dvh; /* שימוש ב-dvh במקום vh למובייל */
+        padding: 2rem 1rem;
+        background-attachment: scroll; /* מניעת בעיות parallax במובייל */
+    }
+
+    .hero-content {
+        padding: 1rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* תיקון למיכל הראשי */
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 1rem;
+        overflow-x: hidden;
+    }
+
+    /* תיקון למרכוז הכותרת */
+    .title-container {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    /* תיקון למרכוז הודעת הברוכים הבאים */
+    .welcome-message {
+        width: 100%;
+        text-align: center;
+        margin: 1.5rem 0;
+    }
+
+    /* תיקון למרכוז כפתור ההרשמה */
+    .cta-button {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* תיקון למרכוז המפגשים הקרובים */
+    .sessions-grid {
+        padding: 0;
+        margin: 1.5rem 0;
+    }
+
+    .session-card {
+        margin: 0;
+        width: 100%;
+    }
+
+    /* תיקון למרכוז הערת המיקום */
+    .location-note {
+        margin: 1.5rem auto;
+        width: calc(100% - 2rem);
+    }
+
+    /* תיקון לרוחב המסך */
+    html, body {
+        width: 100%;
+        overflow-x: hidden;
+        position: relative;
+    }
+
+    /* תיקון למרכוז כותרות */
+    h1, h2 {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* תיקון נוסף לבעיית גלילה אופקית */
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 100%;
+    overflow-x: hidden;
+}
