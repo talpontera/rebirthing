@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Constants
-    const ADMIN_PASSWORD = 'your-secure-password-here';
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwA8qXPJqwAZToVQINyQtz1xcq9QzGfEuMFruO25-QntaUj7okKBWxUPNexat9d8U4/exec'; // Replace with your URL from step 8
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwA8qXPJqwAZToVQINyQtz1xcq9QzGfEuMFruO25-QntaUj7okKBWxUPNexat9d8U4/exec';
     
     // DOM Elements
     const form = document.getElementById('registrationForm');
@@ -110,7 +109,13 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.disabled = true;
 
             try {
-                await saveSubmission(formData);
+                // Save to Google Sheets
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(formData),
+                    mode: 'no-cors'
+                });
+
                 showSuccess('תודה על ההרשמה! ניצור איתך קשר בהקדם');
                 form.reset();
                 resetHealthInfoField();
@@ -122,75 +127,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitButton.disabled = false;
             }
         }
-    }
-
-    // Storage Functions
-    async function saveSubmission(formData) {
-        try {
-            // Save to localStorage
-            const submissions = getSubmissions();
-            submissions.push({ ...formData, id: Date.now() });
-            localStorage.setItem('formSubmissions', JSON.stringify(submissions));
-
-            // Save to Google Sheets
-            const response = await fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                body: JSON.stringify(formData),
-                mode: 'no-cors' // Important for cross-origin requests
-            });
-
-            // Note: We can't actually check the response due to no-cors mode
-            // But the request will still work
-            
-        } catch (error) {
-            console.error('Error saving submission:', error);
-            // Still save to localStorage even if Google Sheets fails
-            const submissions = getSubmissions();
-            submissions.push({ ...formData, id: Date.now() });
-            localStorage.setItem('formSubmissions', JSON.stringify(submissions));
-        }
-    }
-
-    function getSubmissions() {
-        try {
-            return JSON.parse(localStorage.getItem('formSubmissions')) || [];
-        } catch (error) {
-            console.error('Error reading from localStorage:', error);
-            return [];
-        }
-    }
-
-    // Admin Functions
-    function setupAdminAccess() {
-        const viewSubmissionsButton = document.createElement('button');
-        viewSubmissionsButton.textContent = 'צפה ברשימת נרשמים';
-        viewSubmissionsButton.className = 'view-submissions-button';
-        viewSubmissionsButton.style.display = 'none';
-        form.parentNode.insertBefore(viewSubmissionsButton, form.nextSibling);
-
-        viewSubmissionsButton.addEventListener('click', toggleSubmissionsTable);
-        
-        document.addEventListener('keydown', (event) => {
-            if (event.ctrlKey && event.altKey && event.key === 'a') {
-                viewSubmissionsButton.style.display = 'block';
-            }
-        });
-    }
-
-    function toggleSubmissionsTable() {
-        const existingTable = document.getElementById('submissionsTableContainer');
-        if (existingTable) {
-            existingTable.remove();
-            return;
-        }
-        
-        if (prompt('הכנס סיסמת מנהל:') !== ADMIN_PASSWORD) {
-            alert('סיסמה שגויה');
-            return;
-        }
-        
-        const table = createSubmissionsTable();
-        form.parentNode.insertBefore(table, this.nextSibling);
     }
 
     // Helper Functions
@@ -211,7 +147,4 @@ document.addEventListener('DOMContentLoaded', function() {
             healthInfoGroup.style.opacity = this.value === 'other' ? '1' : '0';
         });
     });
-
-    // Initialize
-    setupAdminAccess();
 }); 

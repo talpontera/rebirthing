@@ -25,23 +25,72 @@
             <h2>מפגשים קרובים</h2>
             <div class="sessions-grid">
                 <div class="session-card">
-                    <div class="session-date">
-                        <i class="far fa-calendar"></i>
-                        <span>5.12.24</span>
-                    </div>
-                    <div class="session-time">
-                        <i class="far fa-clock"></i>
-                        <span>חמישי ערב | 20:30-23:00</span>
+                    <div class="session-date">5.12.24</div>
+                    <div class="session-details">
+                        <div class="session-type">
+                            <i class="fas fa-moon"></i>
+                            <span>חמישי ערב</span>
+                        </div>
+                        <div class="session-time">
+                            <i class="far fa-clock"></i>
+                            <span>20:30-23:00</span>
+                        </div>
                     </div>
                 </div>
+
                 <div class="session-card">
-                    <div class="session-date">
-                        <i class="far fa-calendar"></i>
-                        <span>14.12.24</span>
+                    <div class="session-date">14.12.24</div>
+                    <div class="session-details">
+                        <div class="session-type">
+                            <i class="fas fa-moon"></i>
+                            <span>שבת ערב</span>
+                        </div>
+                        <div class="session-time">
+                            <i class="far fa-clock"></i>
+                            <span>19:30-22:00</span>
+                        </div>
                     </div>
-                    <div class="session-time">
-                        <i class="far fa-clock"></i>
-                        <span>שבת ערב | 19:30-22:00</span>
+                </div>
+
+                <div class="session-card">
+                    <div class="session-date">27.12.24</div>
+                    <div class="session-details">
+                        <div class="session-type">
+                            <i class="fas fa-sun"></i>
+                            <span>שישי צהריים</span>
+                        </div>
+                        <div class="session-time">
+                            <i class="far fa-clock"></i>
+                            <span>11:30-14:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="session-card">
+                    <div class="session-date">4.1.25</div>
+                    <div class="session-details">
+                        <div class="session-type">
+                            <i class="fas fa-moon"></i>
+                            <span>חמישי ערב</span>
+                        </div>
+                        <div class="session-time">
+                            <i class="far fa-clock"></i>
+                            <span>19:30-22:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="session-card">
+                    <div class="session-date">11.1.25</div>
+                    <div class="session-details">
+                        <div class="session-type">
+                            <i class="fas fa-moon"></i>
+                            <span>חמישי ערב</span>
+                        </div>
+                        <div class="session-time">
+                            <i class="far fa-clock"></i>
+                            <span>19:30-22:00</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -54,19 +103,28 @@
             
             <div class="team-grid">
                 <div class="team-member">
-                    <div class="member-icon"><i class="fas fa-music"></i></div>
-                    <h3>מאור</h3>
+                    <div class="member-image">
+                        <img src="images/maor.jpg" alt="מאור">
+                    </div>
+                    <h3>מאור אלמליח</h3>
                     <p>מוסיקאי ונגן פסנתר 🎹</p>
+                    <p class="member-description">מנחה מוסמך בנשימה מעגלית, מוזיקאי ופסנתרן. מביא את הקסם של המוזיקה החיה למפגשים.</p>
                 </div>
                 <div class="team-member">
-                    <div class="member-icon"><i class="fas fa-star"></i></div>
-                    <h3>שחר</h3>
-                    <p>משלבת את עולמות האנרגיה ✨</p>
+                    <div class="member-image">
+                        <img src="images/shahar.jpg" alt="שחר">
+                    </div>
+                    <h3>שחר שמש</h3>
+                    <p>מנחת נשימה ומטפלת ✨</p>
+                    <p class="member-description">מנחה מוסמכת בנשימה מעגלית, מטפלת הוליסטית המשלבת את עולמות האנרגיה והריפוי.</p>
                 </div>
                 <div class="team-member">
-                    <div class="member-icon"><i class="fas fa-wind"></i></div>
-                    <h3>טל</h3>
+                    <div class="member-image">
+                        <img src="images/tal.jpg" alt="טל">
+                    </div>
+                    <h3>טל סבג</h3>
                     <p>מטפל בנשימה אינטגרטיבית 🌍</p>
+                    <p class="member-description">מנחה מוסמך בנשימה מעגלית ומטפל בנשימה אינטגרטיבית.</p>
                 </div>
             </div>
 
@@ -107,6 +165,18 @@
                         <label class="radio-label">
                             <input type="radio" name="session" value="14.12.24">
                             <span>14.12.24 | שבת ערב | 19:30-22:00</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="session" value="27.12.24">
+                            <span>27.12.24 | שישי צהריים | 11:30-14:00</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="session" value="4.1.25">
+                            <span>4.1.25 | חמישי ערב | 19:30-22:00</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="session" value="11.1.25">
+                            <span>11.1.25 | חמישי ערב | 19:30-22:00</span>
                         </label>
                     </div>
                 </div>
@@ -168,7 +238,7 @@
 
                 <div class="payment-info">
                     <p>לאחר מילוי ושליחת הטופס, יישלח מייל עם לינק לתשלום בפייבוקס או ביט.</p>
-                    <p>מקומכם בסדנה ישוריין רק לאחר התשלום.</p>
+                    <p>מקומכם בסדנה ישורין רק לאחר התשלום.</p>
                     <p>במקרה של קושי כלכלי, דברו איתנו ונמצא פתרון יחד.</p>
                 </div>
 
