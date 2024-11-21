@@ -256,6 +256,8 @@ section {
     flex-direction: column;
     gap: 1rem;
     animation: slideInRight 0.6s ease-out backwards;
+    transform-origin: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .session-card:nth-child(odd) {
@@ -269,8 +271,8 @@ section {
 .session-card:nth-child(5) { animation-delay: 0.5s; }
 
 .session-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(255, 154, 139, 0.15);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(255, 154, 139, 0.2);
 }
 
 .team-grid {
@@ -1133,6 +1135,8 @@ input[type="checkbox"] {
     flex-direction: column;
     gap: 1rem;
     animation: slideInRight 0.6s ease-out backwards;
+    transform-origin: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .session-card:nth-child(odd) {
@@ -1146,8 +1150,8 @@ input[type="checkbox"] {
 .session-card:nth-child(5) { animation-delay: 0.5s; }
 
 .session-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(255, 154, 139, 0.15);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(255, 154, 139, 0.2);
 }
 
 .session-date, .session-time {
@@ -1313,13 +1317,29 @@ input[type="checkbox"] {
 }
 
 @keyframes slideInRight {
-    from { transform: translateX(100px); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
+    from { 
+        transform: translateX(50px) scale(0.95);
+        opacity: 0;
+        filter: blur(10px);
+    }
+    to { 
+        transform: translateX(0) scale(1);
+        opacity: 1;
+        filter: blur(0);
+    }
 }
 
 @keyframes slideInLeft {
-    from { transform: translateX(-100px); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
+    from { 
+        transform: translateX(-50px) scale(0.95);
+        opacity: 0;
+        filter: blur(10px);
+    }
+    to { 
+        transform: translateX(0) scale(1);
+        opacity: 1;
+        filter: blur(0);
+    }
 }
 
 @keyframes scaleIn {
@@ -1420,4 +1440,60 @@ body {
 .container {
     max-width: 100%;
     overflow-x: hidden;
+}
+
+/* עדכון סגנון התאריך בכרטיסי המפגשים */
+.session-date {
+    font-size: 1.8rem;  /* הגדלת הגופן */
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: linear-gradient(135deg, 
+        rgba(255, 154, 139, 0.1) 0%, 
+        rgba(120, 214, 214, 0.1) 100%);
+    transition: all 0.3s ease;
+}
+
+.session-card:hover .session-date {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, 
+        rgba(255, 154, 139, 0.2) 0%, 
+        rgba(120, 214, 214, 0.2) 100%);
+}
+
+/* הוספת אפקט זוהר בעת ריחוף */
+.session-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px;
+    background: linear-gradient(135deg,
+        rgba(255, 154, 139, 0.2),
+        rgba(120, 214, 214, 0.2));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.session-card:hover::after {
+    opacity: 1;
+}
+
+/* התאמה למסכים קטנים */
+@media (max-width: 768px) {
+    .session-date {
+        font-size: 1.5rem;
+        padding: 0.3rem 0.8rem;
+    }
+    
+    .session-card {
+        margin: 0.5rem 0;
+    }
 }
