@@ -447,13 +447,23 @@ textarea {
 
 /* Success state */
 .form-success {
-    background: var(--success-color);
-    color: var(--white);
-    padding: 1rem;
-    border-radius: 12px;
+    background-color: var(--success-color);
+    color: white;
+    padding: 1.2rem 2rem;  /* Match submit button padding */
+    border-radius: 50px;   /* Match submit button border-radius */
+    margin-top: 2.5rem;    /* Match submit button margin */
     text-align: center;
-    margin-bottom: 2rem;
+    font-size: 1.2rem;     /* Match submit button font-size */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: relative;
     display: none;
+    width: 100%;           /* Match submit button width */
+}
+
+.form-success.visible {
+    opacity: 1;
+    display: block;
 }
 
 /* Loading state */
@@ -773,4 +783,86 @@ textarea {
     0% { transform: translateY(0) translateX(0); opacity: 0; }
     50% { opacity: 0.6; }
     100% { transform: translateY(-100px) translateX(20px); opacity: 0; }
+}
+
+.submissions-table-container {
+    margin: 20px 0;
+    overflow-x: auto;
+}
+
+.submissions-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    direction: rtl;
+}
+
+.submissions-table th,
+.submissions-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: right;
+}
+
+.submissions-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.submissions-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.submissions-table tr:hover {
+    background-color: #f0f0f0;
+}
+
+.view-submissions-button {
+    margin: 20px 0;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.view-submissions-button:hover {
+    background-color: #45a049;
+}
+
+.export-button {
+    margin: 10px 0;
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.export-button:hover {
+    background-color: #45a049;
+}
+
+/* Add success message styling */
+.form-success {
+    background-color: var(--success-color);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: relative;
+    display: none;
+}
+
+.form-success.visible {
+    opacity: 1;
+    display: block;
 } 
