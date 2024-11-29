@@ -1485,3 +1485,92 @@ body {
         margin: 0.5rem 0;
     }
 }
+
+/* About Rebirthing Section */
+.about-rebirthing {
+    padding: 4rem 2rem;
+    background-color: var(--light-bg);
+}
+
+.about-rebirthing h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--primary-color);
+}
+
+.rebirthing-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.rebirthing-content > p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+.rebirthing-benefits,
+.scientific-background,
+.session-description {
+    background-color: white;
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.rebirthing-benefits h3,
+.scientific-background h3,
+.session-description h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+}
+
+.rebirthing-benefits p,
+.scientific-background p,
+.session-description p {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.rebirthing-benefits ul,
+.scientific-background ul,
+.session-description ul {
+    list-style: none;
+    padding-right: 1.5rem;
+}
+
+.rebirthing-benefits li,
+.scientific-background li,
+.session-description li {
+    margin-bottom: 1rem;
+    position: relative;
+    line-height: 1.4;
+}
+
+.rebirthing-benefits li:before,
+.scientific-background li:before,
+.session-description li:before {
+    content: "✨";
+    position: absolute;
+    right: -1.5rem;
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .about-rebirthing {
+        padding: 3rem 1rem;
+    }
+
+    .rebirthing-benefits,
+    .scientific-background,
+    .session-description {
+        padding: 1.5rem;
+    }
+
+    .rebirthing-content > p {
+        font-size: 1.1rem;
+    }
+}
