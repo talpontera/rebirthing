@@ -1,4 +1,63 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Sessions Data
+    const upcomingSessions = [
+        {
+            date: '5.12.24',
+            type: 'חמישי ערב',
+            icon: 'moon',
+            time: '20:30-23:00'
+        },
+        {
+            date: '14.12.24',
+            type: 'שבת ערב',
+            icon: 'moon',
+            time: '19:30-22:00'
+        },
+        {
+            date: '27.12.24',
+            type: 'שישי צהריים',
+            icon: 'sun',
+            time: '11:30-14:00'
+        },
+        {
+            date: '4.1.25',
+            type: 'חמישי ערב',
+            icon: 'moon',
+            time: '19:30-22:00'
+        },
+        {
+            date: '11.1.25',
+            type: 'חמישי ערב',
+            icon: 'moon',
+            time: '19:30-22:00'
+        }
+    ];
+
+    // Render sessions
+    function renderSessions() {
+        const sessionsGrid = document.querySelector('.sessions-grid');
+        if (!sessionsGrid) return;
+
+        sessionsGrid.innerHTML = upcomingSessions.map(session => `
+            <div class="session-card">
+                <div class="session-date">${session.date}</div>
+                <div class="session-details">
+                    <div class="session-type">
+                        <i class="fas fa-${session.icon}"></i>
+                        <span>${session.type}</span>
+                    </div>
+                    <div class="session-time">
+                        <i class="far fa-clock"></i>
+                        <span>${session.time}</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Initialize sessions
+    renderSessions();
+
     // Constants
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwA8qXPJqwAZToVQINyQtz1xcq9QzGfEuMFruO25-QntaUj7okKBWxUPNexat9d8U4/exec';
     
