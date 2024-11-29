@@ -1,4 +1,70 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Sessions Data
+    const upcomingSessions = [
+        
+        {
+            date: '14.12.24',
+            type: 'שבת ערב',
+            icon: 'moon',
+            time: '19:30-22:00'
+        },
+        {
+            date: '27.12.24',
+            type: 'שישי צהריים',
+            icon: 'sun',
+            time: '11:30-14:00'
+        },
+        {
+            date: '4.1.25',
+            type: 'חמישי ערב',
+            icon: 'moon',
+            time: '19:30-22:00'
+        },
+        {
+            date: '11.1.25',
+            type: 'חמישי ערב',
+            icon: 'moon',
+            time: '19:30-22:00'
+        }
+    ];
+
+    // Render sessions
+    function renderSessions() {
+        const sessionsGrid = document.querySelector('.sessions-grid');
+        if (!sessionsGrid) return;
+
+        // Render sessions grid
+        sessionsGrid.innerHTML = upcomingSessions.map(session => `
+            <div class="session-card">
+                <div class="session-date">${session.date}</div>
+                <div class="session-details">
+                    <div class="session-type">
+                        <i class="fas fa-${session.icon}"></i>
+                        <span>${session.type}</span>
+                    </div>
+                    <div class="session-time">
+                        <i class="far fa-clock"></i>
+                        <span>${session.time}</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        // Update radio buttons in the form
+        const radioGroup = document.querySelector('.radio-group');
+        if (radioGroup) {
+            radioGroup.innerHTML = upcomingSessions.map((session, index) => `
+                <label class="radio-label">
+                    <input type="radio" name="session" value="${session.date}" ${index === 0 ? 'required' : ''}>
+                    <span>${session.date} | ${session.type} | ${session.time}</span>
+                </label>
+            `).join('');
+        }
+    }
+
+    // Initialize sessions
+    renderSessions();
+
     // Constants
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwA8qXPJqwAZToVQINyQtz1xcq9QzGfEuMFruO25-QntaUj7okKBWxUPNexat9d8U4/exec';
     
@@ -100,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
             isValid = false;
         }
         if (!formData.session) {
-            showError(document.querySelector('input[name="session"]').parentNode, 'נא לבחור מועד');
+            showError(document.querySelector('input[name="session"]'), 'נא לבחור מועד');
             isValid = false;
         }
 
