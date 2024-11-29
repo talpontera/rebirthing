@@ -1,12 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Sessions Data
     const upcomingSessions = [
-        {
-            date: '5.12.24',
-            type: 'חמישי ערב',
-            icon: 'moon',
-            time: '20:30-23:00'
-        },
+        
         {
             date: '14.12.24',
             type: 'שבת ערב',
@@ -38,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const sessionsGrid = document.querySelector('.sessions-grid');
         if (!sessionsGrid) return;
 
+        // Render sessions grid
         sessionsGrid.innerHTML = upcomingSessions.map(session => `
             <div class="session-card">
                 <div class="session-date">${session.date}</div>
@@ -53,6 +49,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         `).join('');
+
+        // Update radio buttons in the form
+        const radioGroup = document.querySelector('.radio-group');
+        if (radioGroup) {
+            radioGroup.innerHTML = upcomingSessions.map((session, index) => `
+                <label class="radio-label">
+                    <input type="radio" name="session" value="${session.date}" ${index === 0 ? 'required' : ''}>
+                    <span>${session.date} | ${session.type} | ${session.time}</span>
+                </label>
+            `).join('');
+        }
     }
 
     // Initialize sessions
@@ -159,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
             isValid = false;
         }
         if (!formData.session) {
-            showError(document.querySelector('input[name="session"]').parentNode, 'נא לבחור מועד');
+            showError(document.querySelector('input[name="session"]'), 'נא לבחור מועד');
             isValid = false;
         }
 
